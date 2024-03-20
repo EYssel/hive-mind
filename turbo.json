@@ -1,0 +1,29 @@
+{
+    "pipeline": {
+      "build": {
+        "dependsOn": ["^build", "prebuild"],
+        "outputs": ["dist/**", "lib/**", ".next/**"]
+      },
+      "prebuild": {
+        "dependsOn": ["^build"],
+        "outputs": ["db/**"]
+      },
+      "test": {
+        "dependsOn": [],
+        "outputs": []
+      },
+      "test:e2e": {
+        "dependsOn": [],
+        "outputs": []
+      },
+      "lint": {
+        "outputs": []
+      },
+      "dev": {
+        "cache": false
+      },
+      "clean": {
+        "cache": false
+      }
+    }
+  }
