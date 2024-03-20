@@ -1,0 +1,12 @@
+{
+  "name": "hive-mind",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/EYssel/hive-mind.git",
+  "author": "Estian Yssel <estianyssel@gmail.com>",
+  "license": "Apache-2.0",
+  "private": "true",
+  "workspaces": [
+    "apps/*"
+  ]
+}
