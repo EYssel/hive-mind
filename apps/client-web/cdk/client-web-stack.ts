@@ -16,10 +16,8 @@ export class ClientWebStack extends cdk.Stack {
             websiteIndexDocument: "index.html",
             websiteErrorDocument: "error.html",
             publicReadAccess: true,
-            // removalPolicy: cdk.RemovalPolicy.DESTROY,
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
-
-        siteBucket.grantPublicAccess();
 
         const cloudfrontOAI = new cloudfront.OriginAccessIdentity(this, 'cloudfront-OAI', {
             comment: `OAI for ${siteBucket.bucketName}`,
@@ -30,9 +28,7 @@ export class ClientWebStack extends cdk.Stack {
                 actions: ['s3:GetObject'],
                 resources: [siteBucket.arnForObjects('*')],
                 principals: [
-                    new iam.CanonicalUserPrincipal(
-                        cloudfrontOAI.cloudFrontOriginAccessIdentityS3CanonicalUserId,
-                    ),
+                    new iam.AnyPrincipal()
                 ],
             }),
         );
