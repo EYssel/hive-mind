@@ -2,6 +2,7 @@
 import * as cdk from "aws-cdk-lib";
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
 import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
+import * as iam from "aws-cdk-lib/aws-iam";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as s3deploy from "aws-cdk-lib/aws-s3-deployment";
 import { Construct } from "constructs";
@@ -11,31 +12,57 @@ export class ClientWebStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
-        const bucket = new s3.Bucket(this, "StaticSiteBucket", {
+        const siteBucket = new s3.Bucket(this, "StaticSiteBucket", {
             websiteIndexDocument: "index.html",
             websiteErrorDocument: "error.html",
             publicReadAccess: true,
             // removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
-        new s3deploy.BucketDeployment(this, "MyDeployment", {
-            sources: [s3deploy.Source.asset("./build/")],
-            destinationBucket: bucket,
+        const cloudfrontOAI = new cloudfront.OriginAccessIdentity(this, 'cloudfront-OAI', {
+            comment: `OAI for ${siteBucket.bucketName}`,
         });
 
-        new cloudfront.Distribution(
-            this,
-            "SiteDistribution",
-            {
-                defaultBehavior: {
-                    origin: new origins.S3Origin(bucket),
-                    viewerProtocolPolicy:
-                        cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                },
-                // domainNames: [ configData.subDomain+'.' +  configData.domain],
-                // certificate: certificate,
-            }
+        siteBucket.addToResourcePolicy(
+            new iam.PolicyStatement({
+                actions: ['s3:GetObject'],
+                resources: [siteBucket.arnForObjects('*')],
+                principals: [
+                    new iam.CanonicalUserPrincipal(
+                        cloudfrontOAI.cloudFrontOriginAccessIdentityS3CanonicalUserId,
+                    ),
+                ],
+            }),
         );
+
+        const distribution = new cloudfront.Distribution(this, 'SiteDistribution', {
+            defaultRootObject: 'index.html',
+            minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
+            errorResponses: [
+                {
+                    httpStatus: 403,
+                    responseHttpStatus: 403,
+                    responsePagePath: '/error.html',
+                    ttl: cdk.Duration.minutes(30),
+                },
+            ],
+            defaultBehavior: {
+                origin: new origins.S3Origin(siteBucket, {
+                    originAccessIdentity: cloudfrontOAI,
+                }),
+                compress: true,
+                allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
+                viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+            },
+        });
+
+        new s3deploy.BucketDeployment(this, 'DeployWithInvalidation', {
+            sources: [s3deploy.Source.asset('../apps/client-web/build/')],
+            exclude: ['cdk/*', 'cdk.out/*', 'node_modules', 'package-lock.json', 'yarn.lock'],
+            destinationBucket: siteBucket,
+            distribution,
+            distributionPaths: ['/*'],
+        });
     }
 }
 
