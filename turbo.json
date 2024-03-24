@@ -4,10 +4,6 @@
         "dependsOn": ["^build", "prebuild"],
         "outputs": ["dist/**", "lib/**", ".next/**"]
       },
-      "prebuild": {
-        "dependsOn": ["^build"],
-        "outputs": ["db/**"]
-      },
       "test": {
         "dependsOn": [],
         "outputs": []

@@ -1,10 +1,23 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 import 'source-map-support/register';
-import { InfraStack } from './infra-stack';
+
+export class ClientWebStack extends cdk.Stack {
+    constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+      super(scope, id, props);
+  
+      // The code that defines your stack goes here
+  
+      // example resource
+      // const queue = new sqs.Queue(this, 'InfraQueue', {
+      //   visibilityTimeout: cdk.Duration.seconds(300)
+      // });
+    }
+  }
 
 const app = new cdk.App();
-new InfraStack(app, 'InfraStack', {
+new ClientWebStack(app, 'InfraStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
