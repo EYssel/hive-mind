@@ -19,6 +19,8 @@ export class ClientWebStack extends cdk.Stack {
             // removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
+        siteBucket.grantPublicAccess();
+
         const cloudfrontOAI = new cloudfront.OriginAccessIdentity(this, 'cloudfront-OAI', {
             comment: `OAI for ${siteBucket.bucketName}`,
         });
