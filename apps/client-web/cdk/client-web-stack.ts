@@ -57,7 +57,7 @@ export class ClientWebStack extends cdk.Stack {
         });
 
         new s3deploy.BucketDeployment(this, 'DeployWithInvalidation', {
-            sources: [s3deploy.Source.asset('../apps/client-web/build/')],
+            sources: [s3deploy.Source.asset('./build/')],
             exclude: ['cdk/*', 'cdk.out/*', 'node_modules', 'package-lock.json', 'yarn.lock'],
             destinationBucket: siteBucket,
             distribution,
