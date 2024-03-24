@@ -19,7 +19,7 @@ export class ClientWebStack extends cdk.Stack {
         });
 
         new s3deploy.BucketDeployment(this, "MyDeployment", {
-            sources: [s3deploy.Source.asset("../build/")],
+            sources: [s3deploy.Source.asset("./build/")],
             destinationBucket: bucket,
         });
 
