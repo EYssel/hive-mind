@@ -1,5 +1,5 @@
 {
-  "app": "npx tsx cdk/client-web-stack.ts",
+  "app": "npx tsx cdk/client-web-stack.ts --require-approval=never",
   "watch": {
     "include": [
       "**"
