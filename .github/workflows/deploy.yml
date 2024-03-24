@@ -28,11 +28,12 @@ jobs:
       - name: Bootstrap CDK
         run: |
             npm install -g aws-cdk
-            yarn install
             cdk bootstrap aws://${{ secrets.AWS_ACCOUNT_NUMBER }}/${{ secrets.AWS_REGION }}
 
       - name: Build Client Web
-        run: yarn workspace client-web build
+        run: |
+            yarn install
+            yarn workspace client-web build
 
       - name: Deploy Client Web
         working-directory: ./apps/client-web
