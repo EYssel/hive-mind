@@ -15,7 +15,7 @@ export class ClientWebStack extends cdk.Stack {
             websiteIndexDocument: "index.html",
             websiteErrorDocument: "error.html",
             publicReadAccess: true,
-            removalPolicy: cdk.RemovalPolicy.DESTROY,
+            // removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
         new s3deploy.BucketDeployment(this, "MyDeployment", {
