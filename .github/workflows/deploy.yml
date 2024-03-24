@@ -35,6 +35,7 @@ jobs:
         run: yarn workspace client-web build
 
       - name: Deploy Client Web
+        working-directory: ./apps/client-web
         run: yarn workspace client-web deploy
         env:
             AWS_REGION: ${{ secrets.AWS_REGION }}
