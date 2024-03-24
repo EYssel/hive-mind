@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts cdk/infra.ts",
+  "app": "npx tsx cdk/client-web-stack.ts",
   "watch": {
     "include": [
       "**"
