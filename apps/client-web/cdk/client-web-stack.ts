@@ -13,10 +13,13 @@ export class ClientWebStack extends cdk.Stack {
         super(scope, id, props);
 
         const siteBucket = new s3.Bucket(this, "StaticSiteBucket", {
-            websiteIndexDocument: "index.html",
-            websiteErrorDocument: "error.html",
+            websiteIndexDocument: 'index.html',
+            websiteErrorDocument: 'index.html',
             publicReadAccess: true,
             removalPolicy: cdk.RemovalPolicy.DESTROY,
+            autoDeleteObjects: true,
+            blockPublicAccess: s3.BlockPublicAccess.BLOCK_ACLS,
+            accessControl: s3.BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
         });
 
         const cloudfrontOAI = new cloudfront.OriginAccessIdentity(this, 'cloudfront-OAI', {
