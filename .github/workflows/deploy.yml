@@ -37,7 +37,7 @@ jobs:
 
       - name: Deploy Client Web
         working-directory: ./apps/client-web
-        run: cdk deploy
+        run: yarn workspace client-web deploy
         env:
             AWS_REGION: ${{ secrets.AWS_REGION }}
             AWS_ACCOUNT_NUMBER: ${{ secrets.AWS_ACCOUNT_NUMBER }}
