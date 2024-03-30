@@ -8,8 +8,5 @@
   "private": "true",
   "workspaces": [
     "apps/*"
-  ],
-  "devDependencies": {
-    "turbo": "^1.12.5"
-  }
+  ]
 }
