@@ -3,34 +3,31 @@ import { Drawer, Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
 
-export function AppDrawer() {
+export function AppMenu() {
     const [open, setOpen] = React.useState(false);
 
     return (
         <>
-            <Stack direction="row" spacing={4}>
-                <Drawer variant="temporary" anchor="left" open={open}>
+            <Drawer variant="temporary" anchor="left" open={open}>
+                <Stack direction="column" spacing={4} minWidth={75}>
                     <Stack direction="column" spacing={4}>
-                        <Stack direction="column" spacing={4}>
-                            <IconButton href="/">
-                                <House />
-                            </IconButton>
-                            <IconButton href="/posts">
-                                <People />
-                            </IconButton>
-                        </Stack>
-                        <Stack>
-                            <IconButton onClick={() => setOpen(!open)}>
-                                <Close />
-                            </IconButton>
-                        </Stack>
+                        <IconButton href="/">
+                            <House />
+                        </IconButton>
+                        <IconButton href="/posts">
+                            <People />
+                        </IconButton>
+                        <IconButton onClick={() => setOpen(!open)}>
+                            <Close />
+                        </IconButton>
                     </Stack>
-                </Drawer>
-
+                </Stack>
+            </Drawer>
+            <div className="vertical-align:top align:left">
                 <IconButton onClick={() => setOpen(!open)}>
                     <Menu />
                 </IconButton>
-            </Stack>
+            </div>
         </>
     );
 }

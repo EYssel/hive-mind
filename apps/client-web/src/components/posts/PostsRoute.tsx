@@ -1,18 +1,8 @@
 import { Stack } from "@mui/material";
+import { POSTS } from "./POST_DATA";
 import { PostCard } from "./PostCard";
 
-const POSTS = [
-    {
-        title: "test",
-        body: "test test",
-        postTags: ["TypeScript", "React"],
-    },
-    {
-        title: "test",
-        body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quidem doloremque molestias assumenda facere magni sint tempora ratione cupiditate velit dolorum iure odio, nostrum a nam, officiis voluptas reprehenderit aspernatur.",
-        postTags: ["Node.js", "AWS"],
-    },
-];
+
 
 export function PostsRoute() {
     return (
@@ -20,11 +10,13 @@ export function PostsRoute() {
             <Stack spacing={5}>
                 {POSTS.map(
                     (post: {
+                        id: string;
                         title: string;
                         body: string;
                         postTags: string[];
                     }) => (
                         <PostCard
+                            id={post.id}
                             title={post.title}
                             body={post.body}
                             postTags={post.postTags}
