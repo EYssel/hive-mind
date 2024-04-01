@@ -15,8 +15,8 @@ export function PostCard({ id, title, body, postTags }: PostProps) {
                         >
                             {title}
                         </Typography>
-                        <Typography component="div">{body}</Typography>
-                        <PostTags postTags={postTags}/>
+                        <Typography>{body}</Typography>
+                        <PostTags postTags={postTags} />
                     </CardContent>
                 </CardActionArea>
             </Card>

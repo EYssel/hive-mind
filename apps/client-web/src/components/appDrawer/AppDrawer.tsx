@@ -9,7 +9,7 @@ export function AppMenu() {
     return (
         <>
             <Drawer variant="temporary" anchor="left" open={open}>
-                <Stack direction="column" spacing={4} minWidth={75}>
+                <Stack direction="column" spacing={4} minWidth={"75px"}>
                     <Stack direction="column" spacing={4}>
                         <IconButton href="/">
                             <House />
@@ -23,11 +23,19 @@ export function AppMenu() {
                     </Stack>
                 </Stack>
             </Drawer>
-            <div className="vertical-align:top align:left">
-                <IconButton onClick={() => setOpen(!open)}>
-                    <Menu />
-                </IconButton>
-            </div>
+            <IconButton
+                onClick={() => setOpen(!open)}
+                sx={{
+                    minWidth: 50,
+                    minHeight: 50,
+                    verticalAlign: "top",
+                    textAlign: "left",
+                    flex: "none",
+                    marginRight: 5,
+                }}
+            >
+                <Menu />
+            </IconButton>
         </>
     );
 }
