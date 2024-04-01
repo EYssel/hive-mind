@@ -9,8 +9,9 @@ export function PostCard({ id, title, body, postTags }: PostProps) {
                 <CardActionArea href={`post/${id}`}>
                     <CardContent sx={{ minWidth: 275 }}>
                         <Typography
-                            variant="h5"
+                            sx={{ fontSize: 14 }}
                             color="text.secondary"
+                            gutterBottom
                         >
                             {title}
                         </Typography>

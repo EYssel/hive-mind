@@ -11,8 +11,10 @@ export type PostProps = {
 export function Post({title, body, postTags}: PostProps) {
     return (
         <>
-            <Stack>
-                <Typography>
+            <Stack spacing={5}>
+                <Typography
+                    variant="h5"
+                >
                     {title}
                 </Typography>
                 <Typography>
