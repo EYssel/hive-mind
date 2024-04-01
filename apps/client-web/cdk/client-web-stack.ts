@@ -20,6 +20,7 @@ export class ClientWebStack extends cdk.Stack {
             autoDeleteObjects: true,
             blockPublicAccess: s3.BlockPublicAccess.BLOCK_ACLS,
             accessControl: s3.BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
+            bucketName: "hive-mind",
         });
 
         const cloudfrontOAI = new cloudfront.OriginAccessIdentity(this, 'cloudfront-OAI', {
