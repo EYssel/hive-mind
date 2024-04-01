@@ -5,7 +5,7 @@ export function AppBanner() {
     return (
         <>
             <Box>
-                <img src={logo} />
+                <img src={logo} alt="Hive Mind Logo"/>
             </Box>
             <Typography
                 fontSize={30}
