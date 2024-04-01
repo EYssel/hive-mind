@@ -8,7 +8,7 @@ export function HomeRoute() {
                 textAlign: "center",
             }}
         >
-            <img src="logo.png" width={150} className="align-items:center" />
+            <img src="logo.png" width={250} className="align-items:center" />
             <Typography>Welcome to Hive Mind Wiki!</Typography>
         </Paper>
     );
