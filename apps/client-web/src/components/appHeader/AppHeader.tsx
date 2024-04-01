@@ -1,6 +1,6 @@
-import { Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 import { AppMenu } from "..";
-import { AppBanner } from "../appBanner/AppBanner";
+import { AppBanner } from "../appBanner";
 
 export function AppHeader() {
     return (
@@ -9,6 +9,7 @@ export function AppHeader() {
                 <AppMenu />
                 <AppBanner />
             </Stack>
+            <Divider />
         </>
-    )
+    );
 }
