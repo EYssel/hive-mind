@@ -1,5 +1,5 @@
 import { Close, House, Menu, People } from "@mui/icons-material";
-import { Drawer, Stack } from "@mui/material";
+import { Drawer, Stack, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
 
@@ -9,18 +9,21 @@ export function AppMenu() {
     return (
         <>
             <Drawer variant="temporary" anchor="left" open={open}>
-                <Stack direction="column" spacing={4} minWidth={"75px"}>
-                    <Stack direction="column" spacing={4}>
-                        <IconButton href="/">
-                            <House />
-                        </IconButton>
-                        <IconButton href="/posts">
-                            <People />
-                        </IconButton>
-                        <IconButton onClick={() => setOpen(!open)}>
-                            <Close />
-                        </IconButton>
-                    </Stack>
+                <Stack spacing={4} minWidth={"125px"} marginTop={5}>
+                    <IconButton href="/">
+                        <House />
+                        <Typography>Home</Typography>
+                    </IconButton>
+
+                    <IconButton href="/posts">
+                        <People />
+                        <Typography>Posts</Typography>
+                    </IconButton>
+
+                    <IconButton onClick={() => setOpen(!open)}>
+                        <Close />
+                        <Typography>Close</Typography>
+                    </IconButton>
                 </Stack>
             </Drawer>
             <IconButton
