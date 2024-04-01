@@ -5,7 +5,7 @@ export const themeOptions: ThemeOptions = {
     palette: {
         mode: "light",
         primary: {
-            main: "#f38841",
+            main: "#FFC300",
         },
         secondary: {
             main: "#008bf6",
@@ -17,7 +17,7 @@ const theme = createTheme(themeOptions);
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <Stack spacing={5}>
+            <Stack spacing={5} marginTop={5}>
                 <AppHeader />
                 <AppBody />
             </Stack>
