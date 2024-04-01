@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useParams } from "react-router";
 import { Post } from ".";
 import { POSTS } from "./POST_DATA";
@@ -15,7 +16,7 @@ export function PostRoute() {
     const post = getPost(id);
 
     if (!post) {
-        return <>Post Not Found</>;
+        return <Typography>Post Not Found</Typography>;
     }
 
     return (
