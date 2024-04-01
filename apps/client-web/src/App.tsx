@@ -1,6 +1,5 @@
 import { Stack, ThemeOptions, ThemeProvider, createTheme } from "@mui/material";
-import { AppBody } from "./components/body/AppBody";
-import { AppHeader } from "./components/header/AppHeader";
+import { AppBody, AppHeader } from "./components";
 
 export const themeOptions: ThemeOptions = {
     palette: {
