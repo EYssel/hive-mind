@@ -1,6 +1,8 @@
 name: Deploy Client Web
 on:
     push:
+        paths:
+            - "apps/**"
         branches:
             - "master"
 
