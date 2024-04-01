@@ -1,43 +1,48 @@
 name: Deploy Client Web
-on: 
+on:
     push:
         branches:
             - "master"
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: false
+    
 
 permissions:
     id-token: write # AWS OIDC
     contents: read # Checkout
 
 jobs:
-  deploy-client-web:
-    runs-on: ubuntu-latest
+    deploy-client-web:
+        runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "18"
+        steps:
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: "18"
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-            role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_NUMBER }}:role/github-oidc-role
-            aws-region: eu-west-1
-      - name: Check out repository code
-        uses: actions/checkout@v3
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v3
+              with:
+                  role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_NUMBER }}:role/github-oidc-role
+                  aws-region: eu-west-1
+            - name: Check out repository code
+              uses: actions/checkout@v3
 
-      - name: Bootstrap CDK
-        run: |
-            npm install -g aws-cdk
-            cdk bootstrap aws://${{ secrets.AWS_ACCOUNT_NUMBER }}/${{ secrets.AWS_REGION }}
+            - name: Bootstrap CDK
+              run: |
+                  npm install -g aws-cdk
+                  cdk bootstrap aws://${{ secrets.AWS_ACCOUNT_NUMBER }}/${{ secrets.AWS_REGION }}
 
-      - name: Build Client Web
-        run: |
-            yarn install
-            yarn workspace client-web build
+            - name: Build Client Web
+              run: |
+                  yarn install
+                  yarn workspace client-web build
 
-      - name: Deploy Client Web
-        working-directory: ./apps/client-web
-        run: yarn workspace client-web deploy
-        env:
-            AWS_REGION: ${{ secrets.AWS_REGION }}
-            AWS_ACCOUNT_NUMBER: ${{ secrets.AWS_ACCOUNT_NUMBER }}
+            - name: Deploy Client Web
+              working-directory: ./apps/client-web
+              run: yarn workspace client-web deploy
+              env:
+                  AWS_REGION: ${{ secrets.AWS_REGION }}
+                  AWS_ACCOUNT_NUMBER: ${{ secrets.AWS_ACCOUNT_NUMBER }}
