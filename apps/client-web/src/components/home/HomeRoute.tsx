@@ -1,8 +1,5 @@
+import { Typography } from "@mui/material";
+
 export function HomeRoute() {
-    return (
-        <>
-            This is the home route
-        </>
-    )
-    
+    return <Typography>This is the home route</Typography>;
 }
