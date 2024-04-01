@@ -10,6 +10,10 @@ export const themeOptions: ThemeOptions = {
         secondary: {
             main: "#008bf6",
         },
+        background: {
+            default: "#808080",
+            paper: "#FFFFFF"
+        }
     },
 };
 const theme = createTheme(themeOptions);

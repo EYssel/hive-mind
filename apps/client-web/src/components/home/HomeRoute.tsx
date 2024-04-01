@@ -1,5 +1,15 @@
-import { Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
 export function HomeRoute() {
-    return <Typography>This is the home route</Typography>;
+    return (
+        <Paper
+            sx={{
+                padding: 10,
+                textAlign: "center",
+            }}
+        >
+            <img src="logo.png" width={150} className="align-items:center" />
+            <Typography>Welcome to Hive Mind Wiki!</Typography>
+        </Paper>
+    );
 }

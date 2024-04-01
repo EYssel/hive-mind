@@ -1,11 +1,21 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import logo from "../../logo.png";
 
 export function AppBanner() {
     return (
         <>
-            <Typography variant="h4">
+            <Box>
+                <img src={logo} />
+            </Box>
+            <Typography
+                fontSize={30}
+                alignItems={"flex-end"}
+                // sx={{
+                //     alignItems: "center", justifyContent: "space-between", verticalAlign: "middle"
+                // }}
+            >
                 Hive Mind Wiki
             </Typography>
         </>
-    )
+    );
 }

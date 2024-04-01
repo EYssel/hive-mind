@@ -4,22 +4,20 @@ import { PostTags } from "./PostTags";
 
 export function PostCard({ id, title, body, postTags }: PostProps) {
     return (
-        <>
-            <Card variant="outlined">
-                <CardActionArea href={`post/${id}`}>
-                    <CardContent sx={{ minWidth: 275 }}>
-                        <Typography
-                            sx={{ fontSize: 14 }}
-                            color="text.secondary"
-                            gutterBottom
-                        >
-                            {title}
-                        </Typography>
-                        <Typography>{body}</Typography>
-                        <PostTags postTags={postTags} />
-                    </CardContent>
-                </CardActionArea>
-            </Card>
-        </>
+        <Card variant="outlined">
+            <CardActionArea href={`post/${id}`}>
+                <CardContent sx={{ minWidth: 500, maxWidth: 1000 }}>
+                    <Typography
+                        sx={{ fontSize: 14 }}
+                        color="text.secondary"
+                        gutterBottom
+                    >
+                        {title}
+                    </Typography>
+                    <Typography>{body}</Typography>
+                    <PostTags postTags={postTags} />
+                </CardContent>
+            </CardActionArea>
+        </Card>
     );
 }

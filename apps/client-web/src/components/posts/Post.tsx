@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Paper, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { PostTags } from "./PostTags";
 
@@ -9,26 +9,28 @@ export type PostProps = {
     postTags: string[];
 };
 
-export function Post({title, body, postTags}: PostProps) {
+export function Post({ title, body, postTags }: PostProps) {
     const navigate = useNavigate();
     return (
-        <>
+        <Paper
+            sx={{
+                padding: 5,
+            }}
+        >
             <Stack spacing={5}>
-                <Button variant="contained" onClick={() => navigate(-1)} sx={{
-                    alignSelf: "start"
-                }}>
+                <Typography variant="h5">{title}</Typography>
+                <Typography>{body}</Typography>
+                <PostTags postTags={postTags} />
+                <Button
+                    variant="contained"
+                    onClick={() => navigate(-1)}
+                    sx={{
+                        alignSelf: "start",
+                    }}
+                >
                     Back
                 </Button>
-                <Typography
-                    variant="h5"
-                >
-                    {title}
-                </Typography>
-                <Typography>
-                    {body}
-                </Typography>
-                <PostTags postTags={postTags}/>
             </Stack>
-        </>
-    )
+        </Paper>
+    );
 }
